@@ -11,8 +11,8 @@ class Todo {
 			console.log(`${!todo.done ? '[ ]' : '[\u{2713}]'}: ${index} ${todo.todo}`);
 		});
 	}
-	updateTodo(index, status) {
-		this.todos[index].done = status
+	updateStatus(index, field, status) {
+		this.todos[index][field] = status
 		this.displayTodo()
 	};
 
@@ -23,9 +23,15 @@ class Todo {
 				break;
 			case 3:
 				const argument = this.args[1]
-				if (argument !== 'done' && argument !== 'ongoing') return
-				this.updateTodo(this.args[2], this.args[1] === 'done')
-				file.writeTodo(this.todos)
+				if (argument == 'done' || argument == 'ongoing') {
+					this.updateStatus(this.args[2], 'done', this.args[1] === 'done')
+					file.writeTodo(this.todos)
+				}
+				if (argument === 'remove') {
+					this.todos[this.args[2]].status = 'hide'
+					this.updateStatus(this.args[2], 'status', 'hide')
+					file.writeTodo(this.todos)
+				}
 				break;
 			case 4:
 				if (this.args[1] === 'add') {
