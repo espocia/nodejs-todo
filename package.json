@@ -1,11 +1,12 @@
 {
   "name": "nodejs-todo-cli",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "main.js",
   "type": "module",
-  "file": [
-    "*"
-  ],
+  "files": ["*"],
+  "bin": {
+    "todo": "./main.js"
+  },
   "preferGlobal": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,5 +15,5 @@
   "keywords": [],
   "author": "codeclod",
   "license": "ISC",
-  "description": ""
+  "description": "A simple command-line To-Do application built with Node.js that allows users to add, mark as done, mark as ongoing, remove, and view tasks stored in a CSV file."
 }
