@@ -30,12 +30,10 @@ class Todo {
 		};
 
 		if (this.args.length === 3) {
-			if (this.args[1] == 'done') {
-				this.updateTodo(this.args[2], true)
-			} else if (argument[1] === 'ongoing') {
-				this.updateTodo(this.args[2], false)
-
-			}
+			const argument = this.args[1]
+			if (argument !== 'done' && argument !== 'ongoing') return
+			this.updateTodo(this.args[2], this.args[1] === 'done')
+			writeTodo(this.todos)
 
 		};
 	}
@@ -54,6 +52,21 @@ async function readTodo() {
 	} catch (err) {
 		console.log(err)
 		return null
+	}
+}
+
+async function writeTodo(todo) {
+	try {
+		let arrayToString = "todo,done\n";
+		const parsedString = todo.map((entry) => {
+			return `${entry.todo},${entry.done}\n`;
+		});
+		parsedString.forEach((entry) => { arrayToString += entry });;
+
+		await fs.writeFile('data.csv', arrayToString)
+
+	} catch (err) {
+		cosole.log(err)
 	}
 }
 
