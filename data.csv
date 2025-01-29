@@ -1,5 +1,5 @@
 todo,done,status
-Walk the dog,true,show
+Walk the dog,false,show
 Buy Groceries,true,show
 make fried chicken,true,show
 Finish todo CLI app,true,hide
