@@ -8,12 +8,14 @@ class Todo {
 	}
 	displayTodo() {
 		this.todos.forEach((todo, index) => {
-			console.log(`${!todo.done ? '[ ]' : '[\u{2713}]'}: ${index} ${todo.todo}`);
+			if (todo.status !== 'hide') {
+				console.log(`${!todo.done ? '[ ]' : '[\u{2713}]'}: ${index} ${todo.todo}`);
+			};
 		});
 	}
 	updateStatus(index, field, status) {
-		this.todos[index][field] = status
-		this.displayTodo()
+		this.todos[index][field] = status;
+		this.displayTodo();
 	};
 
 	init() {
@@ -22,26 +24,26 @@ class Todo {
 				this.displayTodo();
 				break;
 			case 3:
-				const argument = this.args[1]
+				const argument = this.args[1];
 				if (argument == 'done' || argument == 'ongoing') {
-					this.updateStatus(this.args[2], 'done', this.args[1] === 'done')
-					file.writeTodo(this.todos)
+					this.updateStatus(this.args[2], 'done', this.args[1] === 'done');
+					file.writeTodo(this.todos);
 				}
 				if (argument === 'remove') {
-					this.todos[this.args[2]].status = 'hide'
-					this.updateStatus(this.args[2], 'status', 'hide')
-					file.writeTodo(this.todos)
+					this.todos[this.args[2]].status = 'hide';
+					this.updateStatus(this.args[2], 'status', 'hide');
+					file.writeTodo(this.todos);
 				}
 				break;
 			case 4:
 				if (this.args[1] === 'add') {
-					this.todos.push({ todo: this.args[2], done: this.args[3] === 'true', status: 'show' })
-					file.writeTodo(this.todos)
-					this.displayTodo()
+					this.todos.push({ todo: this.args[2], done: this.args[3] === 'true', status: 'show' });
+					file.writeTodo(this.todos);
+					this.displayTodo();
 				}
 				break;
 			default:
-				console.log('Oh-uh invalid arguments.')
+				console.log('Oh-uh invalid arguments.');
 				break;
 
 		}
@@ -50,24 +52,24 @@ class Todo {
 }
 class File {
 	constructor(file) {
-		this.file = file
+		this.file = file;
 	}
 
 	async readTodo() {
 		try {
-			const data = await fs.readFile(this.file, "utf-8")
+			const data = await fs.readFile(this.file, "utf-8");
 			const entries = data.split('\n').filter((enty) => enty.trim() !== '').map((entry) => {
-				const [todo, done, status] = entry.split(',')
-				const obj = { todo: todo, done: done === 'true' ? true : false, status: status }
-				return obj
+				const [todo, done, status] = entry.split(',');
+				const obj = { todo: todo, done: done === 'true' ? true : false, status: status };
+				return obj;
 			})
-			return entries.slice(1)
+			return entries.slice(1);
 
 		} catch (err) {
-			console.log(err)
-			return null
-		}
-	}
+			console.log(err);
+			return null;
+		};
+	};
 
 	async writeTodo(todo) {
 		try {
@@ -75,20 +77,20 @@ class File {
 			const parsedString = todo.map((entry) => {
 				return `${entry.todo},${entry.done},${entry.status}\n`;
 			});
-			parsedString.forEach((entry) => { arrayToString += entry });;
+			parsedString.forEach((entry) => { arrayToString += entry });
 
-			await fs.writeFile('data.csv', arrayToString)
+			await fs.writeFile('data.csv', arrayToString);
 
 		} catch (err) {
-			cosole.log(err)
-		}
-	}
-}
+			cosole.log(err);
+		};
+	};
+};
 
 const argument = argv.slice(2);
-const file = new File('data.csv')
+const file = new File('data.csv');
 // Reads current todos before initializing
-const infile_todos = await file.readTodo()
+const infile_todos = await file.readTodo();
 // Initialize todo
-const todo = new Todo(argument, infile_todos)
-todo.init()
+const todo = new Todo(argument, infile_todos);
+todo.init();
