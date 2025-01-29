@@ -25,17 +25,28 @@ class Todo {
 	};
 
 	init() {
-		if (this.args.length === 1) {
-			this.displayTodo();
-		};
+		switch (this.args.length) {
+			case 1:
+				this.displayTodo();
+				break;
+			case 2:
+				const argument = this.args[1]
+				if (argument !== 'done' && argument !== 'ongoing') return
+				this.updateTodo(this.args[2], this.args[1] === 'done')
+				writeTodo(this.todos)
+				break;
+			case 4:
+				if (this.args[1] === 'add') {
+					this.todos.push({ todo: this.args[2], done: this.args[3] === 'true' })
+					writeTodo(this.todos)
+					this.displayTodo()
+				}
+				break;
+			default:
+				console.log('Oh-uh invalid arguments.')
+				break;
 
-		if (this.args.length === 3) {
-			const argument = this.args[1]
-			if (argument !== 'done' && argument !== 'ongoing') return
-			this.updateTodo(this.args[2], this.args[1] === 'done')
-			writeTodo(this.todos)
-
-		};
+		}
 	}
 
 }
