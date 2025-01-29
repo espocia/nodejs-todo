@@ -1,5 +1,6 @@
-todo,done
-Walk the dog,true
-Buy Groceries,false
-make fried chicken,true
-Finish todo CLI app,false
+todo,done,status
+Walk the dog,true,show
+Buy Groceries,true,show
+make fried chicken,true,show
+Finish todo CLI app,true,show
+add delete feature to todo app,false,show
