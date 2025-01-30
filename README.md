@@ -3,6 +3,17 @@
 
 A simple command-line To-Do application built with Node.js that allows users to add, mark as done, mark as ongoing, remove, and view tasks stored in a CSV file.
 
+## Installation
+### clone github repo
+```sh
+git clone https://github.com/espocia/nodejs-todo.git
+```
+### link the project globally with
+```sh
+cd nodejs-todo
+npm link
+```
+
 ## Usage
 
 ### Add a Task
