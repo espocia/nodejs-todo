@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 import { argv } from 'node:process'
 import fs from 'node:fs/promises'
+import path from 'node:path'
 
 class Todo {
 	constructor(args, todos) {
@@ -30,9 +33,15 @@ class Todo {
 					file.writeTodo(this.todos);
 				}
 				if (argument === 'remove') {
-					this.todos[this.args[2]].status = 'hide';
-					this.updateStatus(this.args[2], 'status', 'hide');
-					file.writeTodo(this.todos);
+					const target = this.todos[this.args[2]]
+					if (target !== undefined && target.status !== 'hide') {
+						this.todos[this.args[2]].status = 'hide';
+						this.updateStatus(this.args[2], 'status', 'hide');
+						file.writeTodo(this.todos);
+						console.log(target)
+					} else {
+						console.log('Uh-oh invalid argument')
+					}
 				}
 				break;
 			case 4:
@@ -79,7 +88,7 @@ class File {
 			});
 			parsedString.forEach((entry) => { arrayToString += entry });
 
-			await fs.writeFile('data.csv', arrayToString);
+			await fs.writeFile(this.file, arrayToString);
 
 		} catch (err) {
 			cosole.log(err);
@@ -88,7 +97,8 @@ class File {
 };
 
 const argument = argv.slice(2);
-const file = new File('data.csv');
+const filePath = `${import.meta.dirname}/data.csv`
+const file = new File(filePath);
 // Reads current todos before initializing
 const infile_todos = await file.readTodo();
 // Initialize todo

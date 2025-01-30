@@ -1,11 +1,13 @@
 {
   "name": "nodejs-todo-cli",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "main.js",
   "type": "module",
-  "files": ["*"],
+  "files": [
+    "*"
+  ],
   "bin": {
-    "todo": "./main.js"
+    "mytodo": "./main.js"
   },
   "preferGlobal": true,
   "scripts": {

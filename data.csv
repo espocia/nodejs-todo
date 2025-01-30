@@ -1,7 +1,3 @@
 todo,done,status
-Walk the dog,false,show
+Walk the dog,true,show
 Buy Groceries,true,show
-make fried chicken,true,show
-Finish todo CLI app,true,hide
-add delete feature to todo app,false,hide
-add delete feature to todo app,false,hide
