@@ -1,3 +1,9 @@
 todo,done,status
-Walk the dog,true,show
-Buy Groceries,true,show
+Walk the dog,false,hide
+Buy Groceries,true,hide
+make fried chicken,true,hide
+Finish todo CLI app,true,hide
+add delete feature to todo app,false,hide
+add delete feature to todo app,false,hide
+Learn nodejs,false,show
+Create LLM git commit generator.,false,show
