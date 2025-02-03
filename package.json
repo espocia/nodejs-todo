@@ -7,7 +7,7 @@
     "*"
   ],
   "bin": {
-    "mytodo": "./main.js"
+    "todo": "./src/main.js"
   },
   "preferGlobal": true,
   "scripts": {
