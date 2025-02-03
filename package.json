@@ -7,7 +7,11 @@
     "*"
   ],
   "bin": {
+<<<<<<< HEAD
     "mytodo": "./main.js"
+=======
+    "todo": "./src/main.js"
+>>>>>>> 767bb3a (restructure the file tree)
   },
   "preferGlobal": true,
   "scripts": {
