@@ -22,13 +22,14 @@ class Todo {
 
 	init() {
 		switch (this.args.length) {
-			case 1:
+			case 0:
 				this.displayTodo();
 				break;
-			case 3:
-				const argument = this.args[1];
+			case 2:
+				const [argument, index] = this.args;
+				console.log(this.args)
 				if (argument == 'done' || argument == 'ongoing') {
-					this.updateStatus(this.args[2], 'done', this.args[1] === 'done');
+					this.updateStatus(index, 'done', argument === 'done');
 					file.writeTodo(this.todos);
 				}
 				if (argument === 'remove') {
@@ -43,7 +44,7 @@ class Todo {
 					}
 				}
 				break;
-			case 4:
+			case 3:
 				if (this.args[1] === 'add') {
 					this.todos.push({ todo: this.args[2], done: this.args[3] === 'true', status: 'show' });
 					file.writeTodo(this.todos);
