@@ -10,5 +10,5 @@ const file = new File(filePath);
 // Reads current todos before initializing
 const infile_todos = await file.readTodo();
 // Initialize todo
-const todo = new Todo(argument, infile_todos);
+const todo = new Todo(argument, infile_todos, file);
 todo.init();
