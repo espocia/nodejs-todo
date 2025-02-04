@@ -1,8 +1,9 @@
 
 export default class Todo {
-	constructor(args, todos) {
+	constructor(args, todos, file) {
 		this.args = args
 		this.todos = todos
+		this.file = file
 	}
 	displayTodo() {
 		this.todos.forEach((todo, index) => {
@@ -26,14 +27,14 @@ export default class Todo {
 				const [argument, index] = this.args;
 				if (argument == 'done' || argument == 'ongoing') {
 					this.updateStatus(index, 'done', argument === 'done');
-					file.writeTodo(this.todos);
+					this.file.writeTodo(this.todos);
 				}
 				if (argument === 'remove') {
 					const target = this.todos[index]
 					if (target !== undefined && target.status !== 'hide') {
 						this.todos[index].status = 'hide';
 						this.updateStatus(index, 'status', 'hide');
-						file.writeTodo(this.todos);
+						this.file.writeTodo(this.todos);
 					} else {
 						console.log('Uh-oh invalid argument')
 					}
@@ -44,7 +45,7 @@ export default class Todo {
 				const [argument, todo, status] = this.args;
 				if (argument === 'add') {
 					this.todos.push({ todo: todo, done: status === 'true', status: 'show' });
-					file.writeTodo(this.todos);
+					this.file.writeTodo(this.todos);
 					this.displayTodo();
 				}
 				break;
